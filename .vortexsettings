@@ -1,0 +1,14 @@
+{
+    // modules that can be used with the 'using' keyword
+    "usingModules": {
+        "NodeJS": {
+            "object": "globalThis" // globalThis is just the global object in Node.js
+        }
+    },
+    // built-in namespaces that can be used without importing
+    "builtInNamespaces": {
+        "Console": {
+            "print": "v => console.log(v)"
+        }
+    }
+}
