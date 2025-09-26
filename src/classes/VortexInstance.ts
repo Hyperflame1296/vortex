@@ -1,12 +1,13 @@
-let color = require('cli-color')
-let fs = require('node:fs');
+import color from 'cli-color'
+import fs from 'node:fs'
+import remove_json_comments from 'strip-json-comments'
 let tags = {
     tag_error: `${color.whiteBright('[')}${color.redBright('ERROR')}${color.whiteBright(']')} -`,
     tag_warning: `${color.whiteBright('[')}${color.yellowBright('WARNING')}${color.whiteBright(']')} -`,
     tag_info: `${color.whiteBright('[')}${color.cyanBright('INFO')}${color.whiteBright(']')} -`,
 }
-let remove_json_comments = require('strip-json-comments').default;
 class VortexInstance {
+    settings: object
     settingsLoaded = false
     tokens = {
         ' ': 'whitespace',
@@ -97,7 +98,7 @@ class VortexInstance {
         this.settings = JSON.parse(remove_json_comments(fs.readFileSync('.vortexsettings', 'utf8')))
         this.settingsLoaded = true
     }
-    tokenize(line) {
+    tokenize(line: string) {
         let tokens = [];
         let i = 0;
         let inString = false;
@@ -210,7 +211,7 @@ class VortexInstance {
 
         return tokens;
     }
-    highlight(p) {
+    highlight(p: string) {
         let data = fs.readFileSync(p, 'utf8');
         if (!this.settingsLoaded)
             throw `${tags.tag_error} Vortex settings not loaded!`;
@@ -261,14 +262,15 @@ class VortexInstance {
         }
         console.log(lg)
     }
-    interpret(p) {
+    interpret(p: string) {
         let data = fs.readFileSync(p, 'utf8');
         let commented = false
         let string = false
         let block
         let blocks = []
         let split = data.split('\n')
-        
+        let warnings = 0
+        let errors = 0
         for (let line of split) {
             let linew = line
             line = line.trim()
@@ -323,19 +325,21 @@ class VortexInstance {
             }
         }
         if (blocks.length > 0) {
-            throw [
+            console.error([
                 `${tags.tag_error} Vortex syntax error - Unclosed block!`, 
                 `Error info:`,
                 `    blockType=${blocks[blocks.length - 1].type === 0 ? '\'code block\'' : '\'grouping block\''}`,
                 `    blockBegin=${blocks[blocks.length - 1].begin + 1}`
-            ].join('\n')
+            ].join('\n'))
+            return false
         }
+        return [warnings, errors]
     }
     compile(data) {
         console.log('Compiler coming soon!')
         return data;
     }
 }
-module.exports = {
+export {
     VortexInstance
-};
+}

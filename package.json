@@ -1,31 +1,37 @@
 {
-  "name": "vortex",
-  "version": "0.1.0",
-  "description": "a programming language.",
-  "keywords": [
-    "programming",
-    "language"
-  ],
-  "homepage": "https://github.com/Hyperflame1296/vortex#readme",
-  "bugs": {
-    "url": "https://github.com/Hyperflame1296/vortex/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Hyperflame1296/vortex.git"
-  },
-  "license": "ISC",
-  "author": "TensiveYT",
-  "type": "commonjs",
-  "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
-  "scripts": {
-    "test": "node test"
-  },
-  "dependencies": {
-    "cli-color": "^2.0.4",
-    "strip-json-comments": "^5.0.3"
-  }
+    "name": "vortex",
+    "version": "0.1.0-alpha.rev0",
+    "description": "a programming language.",
+    "keywords": [
+        "programming",
+        "language"
+    ],
+    "homepage": "https://github.com/Hyperflame1296/vortex#readme",
+    "bugs": {
+        "url": "https://github.com/Hyperflame1296/vortex/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Hyperflame1296/vortex.git"
+    },
+    "bin": {
+        "vortex": "dist/vortex.js"
+    },
+    "license": "ISC",
+    "author": "TensiveYT",
+    "type": "module",
+    "directories": {
+        "example": "example/"
+    },
+    "scripts": {
+        "test": "node test",
+        "build": "tsc",
+        "prepublishOnly": "npm run build"
+    },
+    "dependencies": {
+        "@types/node": "^24.5.2",
+        "cli-color": "^2.0.4",
+        "strip-json-comments": "^5.0.3",
+        "typescript": "^5.9.2"
+    }
 }
