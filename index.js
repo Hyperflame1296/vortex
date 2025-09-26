@@ -89,7 +89,8 @@ class VortexInstance {
         'using': 'kw_using',
         '\'': 'string_squote',
         '"': 'string_dquote',
-        '`': 'string_btick'
+        '`': 'string_btick',
+        '@': 'gop'
     }
     loadSettings() {
         if (this.settingsLoaded) return
@@ -240,7 +241,7 @@ class VortexInstance {
                         return color.green(t.value)
                     } else if (t.type.includes('mod_') || t.type.includes('type_')) {
                         return color.blueBright(t.value)
-                    } else if (t.type.includes('kw_')) {
+                    } else if (t.type.includes('kw_') || t.type === 'gop') {
                         return color.magentaBright(t.value)
                     } else if (t.type.includes('op_')) {
                         return color.white(t.value)
