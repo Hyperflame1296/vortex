@@ -1,0 +1,6 @@
+// Vortex language example
+
+@require Node::console // get the console object from Node.JS
+entry() {
+    console::log('hello world') // logs 'hello world' into console
+}

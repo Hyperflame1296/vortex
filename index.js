@@ -209,7 +209,8 @@ class VortexInstance {
 
         return tokens;
     }
-    highlight(data) {
+    highlight(p) {
+        let data = fs.readFileSync(p, 'utf8');
         if (!this.settingsLoaded)
             throw `${tags.tag_error} Vortex settings not loaded!`;
 
@@ -259,12 +260,14 @@ class VortexInstance {
         }
         console.log(lg)
     }
-    interpret(data) {
+    interpret(p) {
+        let data = fs.readFileSync(p, 'utf8');
         let commented = false
         let string = false
         let block
         let blocks = []
         let split = data.split('\n')
+        
         for (let line of split) {
             let linew = line
             line = line.trim()
