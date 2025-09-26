@@ -8,7 +8,8 @@
 */
 
 // access & edit Node.js variables from Vortex
-NodeJS.process.stdout.write('hi')
+@require External::process
+process.stdout.write('hi\n')
 
 Console::print(process.argv) // prints to console
 
